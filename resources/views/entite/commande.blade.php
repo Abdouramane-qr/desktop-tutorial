@@ -90,14 +90,17 @@
               </div>
           @endif
           
-          <button class="button" data-modal="modalTwo" style="background: #007bff; width: 90px">Ajouter</button>
-
+          <button class="button" data-modal="modalTwo" style="background: #007bff; width: 90px">Ajouter</button>         
+          
+          <a class="btn btn-success" href="{{route('generate-pdf')}}">Telecharger</a>
           
         </div>
       </div>
     </div>
   </div>
     
+
+  
 @endsection
 
 @section('content')
@@ -122,23 +125,27 @@
             </thead>
             <tbody>
               @foreach ($commandes as $commande)
-                <tr style="cursor: pointer">
+             <tr style="cursor: pointer">
                   <th scope="row">{{$commande->id}}</th>
-                  <td>{{$commande->article}}</td>
-                  <td>{{$commande->quantite}}</td>
-                  <td>{{$commande->price}}</td>
-                  <td>{{$commande->ptotal() }}</td>
+                  <td><a href="{{route('commande.show',['id'=>$commande->id])}}">{{$commande->article}}</a></td>
+                  <td><a href="{{route('commande.show',['id'=>$commande->id])}}">{{$commande->quantite}}</a></td>
+                  <td><a href="{{route('commande.show',['id'=>$commande->id])}}">{{$commande->price}}</a></td>
+                  <td><a href="{{route('commande.show',['id'=>$commande->id])}}">{{$commande->ptotal() }}</a></td>
                   
                   <td style="color: green">{{$commande->created_at}}</td>
                 </tr>
+              
                 
               @endforeach
 
             </tbody>
           </table>
-@foreach ($commandes   as $item)
-<label for="">TOTAL:${{$item->ptixtt()}}</label>
-@endforeach
+          <h3>
+            <div style="float&#58;left">Vendeur</div> 
+            <div style="float&#58;right">TOTAL: {{$prixTotalCom}} FCFA</div>
+            
+           </h3>
+          
 
         </div>
    

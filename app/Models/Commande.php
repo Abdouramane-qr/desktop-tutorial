@@ -27,6 +27,18 @@ public function ptotal()
     return $this->Prixtotl;
 }
 
+public function totalcmd(){
+
+    $commandes = Commande::all();
+
+    $prixTotalCom = 0;
+
+    foreach ($commandes as $commands) {
+        $prixTotalCom += $commands->ptotal();
+    }
+    return $prixTotalCom;
+}
+
 
         public function ptixtt()
         {

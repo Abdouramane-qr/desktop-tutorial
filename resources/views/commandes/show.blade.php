@@ -1,5 +1,4 @@
 @extends('layouts.main')    
-
 @section('css')
   <style>
 
@@ -83,14 +82,14 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-12" style="display: flex; justify-content: space-between">
-          <h1 class="m-0" >Clients</h1>
+          <h1 class="m-0">Details commandes</h1>
           @if (session('success'))
               <div style="color: green">
                 {{session('success')}}
               </div>
           @endif
           
-          <button class="button" data-modal="modalTwo" style="background: #007bff; width: 90px">Ajouter</button>
+          <button class="button" data-modal="modalTwo" style="background: #007bff; width: 90px">Afficher</button>
 
           
         </div>
@@ -108,47 +107,41 @@
       <div class="row">
 
         <div class="col-lg-12 col-6">
-          <table class="table table-hover" style="border: 1px solid; background: #fff">
+          {{-- <table class="table table-hover" style="border: 1px solid; background: #fff">
             <thead>
               <tr>
                 <th scope="col">id</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Adresse</th>
-                <th scope="col">Téléphone</th>
-                {{-- <th scope="col">Commande</th>
-                <th scope="col">Quantité</th> --}}
-                <th scope="col">date</th>
+                <th scope="col">article acheté</th>
+                <th scope="col">quantite</th>
+                <th scope="col">Prix Unitaire</th>
+                <th scope="col">Prix total</th>
+                <th scope="col" style="color: green">date</th>
+                
               </tr>
             </thead>
-            
             <tbody>
-              @foreach ($clients as $client)
                 <tr style="cursor: pointer">
-                  <th scope="row">{{$client->id}}</th>
-                  <td>{{$client->nom_client}}</td>
-                  @if ($client->adresse_client)
-                    <td>{{$client->adresse_client}}</td>
-                  @endif
-                  <td>{{$client->tel_client}}</td>
-                  {{-- <td>{{$client->commande}}</td>
-                  <td>{{$client->quantite}}</td> --}}
-                  <td>{{$client->created_at}}</td>
-                  <td>
-                  <form action="{{ route('client.destroy', $client->id)}}" method="post">
-                          @csrf
-                          @method('delete')
-                          <button class="btn btn-danger" type="submit">Delete</button>
-                    </form>  
-                    <td><a href="{{ route('depenses.edit', $client->id)}}" class="btn btn-primary">Edit</a></td> 
-
-                  </td>
+                  
                 </tr>
-              @endforeach
+                
+              
 
             </tbody>
-          </table>
+          </table> --}}
+
+          {{-- <th scope="row">{{$commande->id}}</th> --}}
+                  <td>{{$commande->article}}</td>
+                  <td>{{$commande->quantite}}</td>
+                  <td>{{$commande->price}}</td>
+                  <td>{{$commande->ptotal() }}</td>
+                  
+                  <td style="color: green">{{$commande->created_at}}</td>
+
+
+
+
         </div>
-        
+   
         {{-- <div class="col-lg-5 col-6">
           <!-- small box -->
           <div class="small-box bg-success">
@@ -181,10 +174,10 @@
                 <div style="cursor: pointer">
                   <span class="close" >&times;</span>
                 </div>
-                <form method="POST" action="{{route('client.store')}}" style="background: white;" >
+                <form method="POST" action="{{route('commande.store')}}" style="background: white;" >
                   {{ csrf_field() }}
                   
-                  <h2 style="width: 100%; text-align: center">Nouveau client</h2>
+                  <h2 style="width: 100%; text-align: center">Nouvelle commande</h2>
         
                   <div class="inputBox">
                     @if ($errors->has('commande'))
@@ -197,9 +190,9 @@
                     {{-- <input type="number" name="commande" required="required" > --}}
                     <select name="commande" required="required" style="border-bottom: 2px solid #333; width: 50%; border-top: none;">
                         <option ><span>Article acheté</span></option>
-                        @foreach ($articles as $article)
+                        {{-- @foreach ($articles as $article)
                             <option value="{{$article->name}}">{{$article->name}}</option>
-                        @endforeach
+                        @endforeach --}}
                       </select>
                     {{-- <span>Commande</span> --}}
                   </div>
@@ -217,41 +210,17 @@
                   </div>
 
                   <div class="inputBox">
-                    @if ($errors->has('name'))
-                        <p style="color: red">{{$errors->first('name')}}</p>
-                        <script>
-                          document.getElementById('modalTwo').style.display = "block";
-                        </script>
-                    @endif
-                    
-                    <input type="text" name="name" required="required" >
-                    <span>Nom du client</span>
-                  </div>
-                  
-                  <div class="inputBox">
-                    @if ($errors->has('address'))
-                        <p style="color: red">{{$errors->first('address')}}</p>
+                    @if ($errors->has('price'))
+                        <p style="color: red">{{$errors->first('price')}}</p>
                         <script>
                           document.getElementById('modalTwo').style.display = "block";
                         </script>
                     @endif
 
-                    <input type="text" name="address" required="required" >
-                    <span>Adresse du client (facultatif)</span>
+                    <input type="number" name="price" required="required" >
+                    <span>Prix</span>
                   </div>
-        
-                  <div class="inputBox">
-                    @if ($errors->has('tel'))
-                        <p style="color: red">{{$errors->first('tel')}}</p>
-                        <script>
-                          document.getElementById('modalTwo').style.display = "block";
-                        </script>
-                    @endif
 
-                    <input type="text" name="tel" required="required" >
-                    <span>Téléphone</span>
-                  </div>
-        
                   <div class="inputBox">
                     <input type="submit" name="" value="Envoyer">
                   </div>

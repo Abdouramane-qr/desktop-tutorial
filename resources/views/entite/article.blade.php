@@ -113,7 +113,7 @@
               <tr>
                 <th scope="col">id</th>
                 <th scope="col">Nom</th>
-                <th scope="col">Prix unitaire</th>
+                <th scope="col">Prix unitaire </th>
                 <th scope="col">Stock minimal</th>
                 <th scope="col">Stock actuel</th>
                 <th scope="col">Créer le</th>
@@ -125,7 +125,7 @@
                 <tr style="cursor: pointer">
                   <th scope="row">{{$article->id}}</th>
                   <td>{{$article->name}}</td>
-                  <td>{{$article->prixUnitaire}} &nbsp;F</td>
+                  <td>{{$article->prixUnitaire}} &nbsp;FCFA</td>
                   <td>{{$article->stockMinimal}}</td>
                   <td>{{$article->stockMaximal}}</td>
                   <td>{{$article->created_at}}</td>

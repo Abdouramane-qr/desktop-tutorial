@@ -11,13 +11,15 @@ class ClientController extends Controller
     public function index(){
         $articles = Article::all();
         $clients = Client::all();
-        $fournisseurs= Fournisseur::all();
+        // $fournisseurs= Fournisseur::all();
         return view('entite.client',[
             'articles'=>$articles,
             'clients'=>$clients,
-            'fournisseus'=>$fournisseurs
+            // 'fournisseus'=>$fournisseurs
         ]);
     }
+
+    
 
     public function store(Request $request){
         $request->validate([
@@ -40,7 +42,16 @@ class ClientController extends Controller
         return back()->with('success', $success);
     }
 
+    public function destroy(Client $clients){
+        $clients->delete();
+        return redirect()->route('client.view');
+        
+            }
 
-
-    
+            public function edit(Client $clients)
+            {
+                $clients = Client::all();
+                return view('client.view', compact('clients'));
+            }            
+   
 }

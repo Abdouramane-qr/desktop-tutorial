@@ -26,7 +26,7 @@
   <!-- Daterange picker -->
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
-  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css'">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -118,10 +118,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/kass.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Kassoum Coulibaly</a>
+          <a href="#" class="d-block">QUOREICH-FONDATION</a>
         </div>
       </div>
 
@@ -159,11 +159,25 @@
                 </a>
               </li>
               <li class="nav-item">
-              <a href="{{route('fournisseur-view)'}}" class="nav-link">
+              <a href="{{route('fournisseurs.index')}}" class="nav-link">
                   {{-- <i class="far fa-circle nav-icon"></i> --}}
                   <p>Fournisseur</p>
                 </a>
               </li>
+
+              <li class="nav-item">
+              <a href="{{ route('depenses.index')}}" class="nav-link">
+                    {{-- <i class="far fa-circle nav-icon"></i> --}}
+                    <p>Depenses</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="{{ route('stocks.index')}}" class="nav-link">
+                        {{-- <i class="far fa-circle nav-icon"></i> --}}
+                        <p>Stocks</p>
+                      </a>
+                    </li>
 
               
             </ul>
@@ -185,7 +199,7 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2021 <a href="kassbth.net">kass-bth</a>.</strong>
+    <strong>Copyright &copy; 2021 <a href="kassbth.net">QUOREICH-FONDATION</a>.</strong>
     tout droit réservé
     <div class="float-right d-none d-sm-inline-block">
       {{-- <b>Version</b> 1 --}}
@@ -209,16 +223,16 @@
   $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src=" plugins/bootstrap/js/bootstrap.bundle.min.js"> </script>
 <!-- ChartJS -->
 <script src="plugins/chart.js/Chart.min.js"></script>
 <!-- Sparkline -->
-<script src="plugins/sparklines/sparkline.js"></script>
+<script src=" plugins/sparklines/sparkline.js"></script>
 <!-- JQVMap -->
 <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
 <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
 <!-- jQuery Knob Chart -->
-<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+<script src=" plugins/jquery-knob/jquery.knob.min.js"></script>
 <!-- daterangepicker -->
 <script src="plugins/moment/moment.min.js"></script>
 <script src="plugins/daterangepicker/daterangepicker.js"></script>
@@ -227,7 +241,7 @@
 <!-- Summernote -->
 <script src="plugins/summernote/summernote-bs4.min.js"></script>
 <!-- overlayScrollbars -->
-<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src=" plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
