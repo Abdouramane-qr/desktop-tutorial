@@ -1,4 +1,5 @@
-@extends('layouts.main');
+
+@extends('layouts.main')    
 
 @section('css')
   <style>
@@ -79,17 +80,20 @@
 
 @section('content-title')
 
-  <div  style="margin-bottom: 10px"  class="content-header  row">
+  <div class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-12" style="display: flex; justify-content: space-between">
-          <h1 class="m-0" >Fournisseurs</h1>
+          <h1 class="m-0">Fournisseurs</h1>
           @if (session('success'))
               <div style="color: green">
                 {{session('success')}}
               </div>
           @endif
-        <button  class="button" data-modal="modalTwo" style="background: #007bff; width: 90px">Ajouter</button>
+          
+          <button class="button" data-modal="modalTwo" style="background: #007bff; width: 90px">Ajouter</button>
+
+          
         </div>
       </div>
     </div>
@@ -106,135 +110,113 @@
 
         <div class="col-lg-12 col-6">
           <table class="table table-hover" style="border: 1px solid; background: #fff">
+
             <thead>
               <tr>
                 <th scope="col">id</th>
                 <th scope="col">Nom</th>
                 <th scope="col">Adresse</th>
                 <th scope="col">Téléphone</th>
-                {{-- <th scope="col">Commande</th>
-                <th scope="col">Quantité</th> --}}
                 <th scope="col">date</th>
+                <th scope="col">Butons</th>
               </tr>
             </thead>
+
             <tbody>
-              @foreach ($fournisseurs as $fournisseur)
+              @foreach ($fournisseurs as $fourisseur)
                 <tr style="cursor: pointer">
-                  <th scope="row">{{ $fournisseur->id}}</th>
-                  <td>{{ $fournisseur->nom}}</td>
-                  @if ( $fournisseur->adresse)
-                    <td>{{ $fournisseur->nom_client}}</td>
+                  <th scope="row">{{$fournisseur->id}}</th>
+                  <td>{{$fournisseur->nom}}</td>
+                  @if ($fournisseur->adresse)
+                    <td>{{$fournisseur->nom}}</td>
                   @endif
-                  <td>{{ $fournisseur->telephone}}</td>
-                  <td>{{ $fournisseur->created_at}}</td>
-                
-        
-                  <td>
-									<button class="btn btn-info" data-mytitle="{{$fournisseur->nom}}" data-mydescription="{{$fournisseur->adresse}}" data-catid={{$fournisseur->id}} data-toggle="modal" data-target="#edit">Edit</button>
-									
-									<button class="btn btn-danger" data-catid={{$fournisseur->id}} data-toggle="modal" data-target="#delete">Delete</button>
-								</td>
-                </tr>
+                  <td>{{$fournisseur->telephone}}</td>
+                  <td>{{$fournisseur->created_at}}</td>
+               
               @endforeach
+                  
+              <td>
+                  <form action="{{route('fournisseurs.destroy',$fournisseurs->id)}}" method="post">
+                  <a href="{{route('fournisseurs.show',$fournisseurs->id)}}"  class="btn btn-info">Afficher</a>
+                  <a href="{{route('fournisseurs.edit',$fournisseurs->id)}}"  class="btn btn-primary">modifier</a>
+                    {{csrf_field()}}
+                    {{method_field('DELETE')}}
+                  <button type="submit"  class="btn btn-danger">Supprimer</button>
+
+                  </form>
+                  
+                  
+              </td>
+                </tr>
+             
 
             </tbody>
           </table>
         </div>
         
-        {{-- <div class="col-lg-5 col-6">
-          <!-- small box -->
-          <div class="small-box bg-success">
-            <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-              <p>Bounce Rate</p>
-            </div>
-            
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div> --}}
-
-        {{--  --}}
+      
         
-       <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-  Add New
-</button>
+        <div id="modalTwo" class="modal" >
+          
+            
+              <div class="contact-form">
+                <div style="cursor: pointer">
+                  <span class="close" >&times;</span>
+                </div>
+                <form method="POST" action="{{route('fournisseurs.store')}}" style="background: white;" >
+                  {{ csrf_field() }}
+                  
+                  <h2 style="width: 100%; text-align: center">Ajout d'un  Fournisseur</h2>
+        
+                  <div class="inputBox">
+                    @if ($errors->has('nom'))
+                        <p style="color: red">{{$errors->first('nom')}}</p>
+                        <script>
+                          document.getElementById('modalTwo').style.display = "block";
+                        </script>
+                    @endif
+                    
+                    <input type="text" name="nom" required="required" >
+                    <span>Nom  Fournisseur</span>
+                  </div>
+                  
+                  <div class="inputBox">
+                    @if ($errors->has('adresse'))
+                        <p style="color: red">{{$errors->first('adresse')}}</p>
+                        <script>
+                          document.getElementById('modalTwo').style.display = "block";
+                        </script>
+                    @endif
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
- <div class="modal-dialog" role="document">
-   <div class="modal-content">
-     <div class="modal-header">
+                    <input type="text" name="adresse" required="required" >
+                    <span>Adresse fournisseur</span>
+                  </div>
+        
+                  <div class="inputBox">
+                    @if ($errors->has('telephone'))
+                        <p style="color: red">{{$errors->first('telephone')}}</p>
+                        <script>
+                          document.getElementById('modalTwo').style.display = "block";
+                        </script>
+                    @endif
 
-       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-       <h4 class="modal-title" id="myModalLabel">New Fournisseur</h4>
-     </div>
-     <form action="{{route('fournisseurs.store')}}" method="post">
-         {{csrf_field()}}
-       <div class="modal-body">
-       @include('fournisseurs.form')
-       </div>
-       <div class="modal-footer">
-         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-         <button type="submit" class="btn btn-primary">Save</button>
-       </div>
-     </form>
-   </div>
- </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
- <div class="modal-dialog" role="document">
-   <div class="modal-content">
-     <div class="modal-header">
-       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-       <h4 class="modal-title" id="myModalLabel">   Edit Fournisseur   </h4>
-     </div>
-     <form action="{{route('fournisseurs.update','/fournisseurs')}}" method="post">
-         {{method_field('patch')}}
-         {{csrf_field()}}
-       <div class="modal-body">
-           <input type="hidden" name="fournisseurs_id" id="cat_id" value="">
-       @include('fournisseurs.form')
-       </div>
-       <div class="modal-footer">
-         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-         <button type="submit" class="btn btn-primary">Save Changes</button>
-       </div>
-     </form>
-   </div>
- </div>
-</div>
-
-<!-- Modal -->
-<div class="modal modal-danger fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
- <div class="modal-dialog" role="document">
-   <div class="modal-content">
-     <div class="modal-header">
-       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-       <h4 class="modal-title text-center" id="myModalLabel">Delete Confirmation</h4>
-     </div>
-     <form action="{{route('fournisseurs.destroy','fournisseurs')}}" method="post">
-         {{method_field('delete')}}
-         {{csrf_field()}}
-       <div class="modal-body">
-       <p class="text-center">
-         Are you sure you want to delete this?
-       </p>
-           <input type="hidden" name="nom" id="cat_id" value="">
-
-       </div>
-       <div class="modal-footer">
-         <button type="button" class="btn btn-success" data-dismiss="modal">No, Cancel</button>
-         <button type="submit" class="btn btn-warning">Yes, Delete</button>
-       </div>
-     </form>
-   </div>
- </div>
-</div>
-
+                    <input type="text" name="telephone" required="required" >
+                    <span>Téléphone </span>
+                  </div>
+                  <div class="inputBox">
+                    <input type="submit" name="" value="Envoyer">
+                  </div>
+        
+                </form>
+                
+              </div>
+            
+        </div>
+        
+      </div>
+     
+    </div>
+  </section>
 
 
 @endsection
@@ -261,33 +243,6 @@
         event.target.style.display = "none";
       }
     }
-
-     
-  $('#edit').on('show.bs.modal', function (event) {
-
-var button = $(event.relatedTarget) 
-var title = button.data('mytitle') 
-var description = button.data('mydescription') 
-var cat_id = button.data('catid') 
-var modal = $(this)
-
-modal.find('.modal-body #title').val(title);
-modal.find('.modal-body #des').val(description);
-modal.find('.modal-body #cat_id').val(cat_id);
-})
-
-
-$('#delete').on('show.bs.modal', function (event) {
-
-var button = $(event.relatedTarget) 
-
-var cat_id = button.data('catid') 
-var modal = $(this)
-
-modal.find('.modal-body #cat_id').val(cat_id);
-});
   </script>
-
-
  
 @endsection

@@ -15,7 +15,8 @@ class CreateCommandeArticlesTable extends Migration
     {
         Schema::create('commande_articles', function (Blueprint $table) {
             $table->id();
-            
+            $table->foreign('id')->reference('id')->on('commandes')->onDelete('cascade');
+            $table->foreign('id')->reference('id')->on('articles')->onDelete('cascade');
             $table->timestamps();
         });
     }

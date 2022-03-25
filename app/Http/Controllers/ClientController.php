@@ -42,7 +42,9 @@ class ClientController extends Controller
         return back()->with('success', $success);
     }
 
-    public function destroy(Client $clients){
+    public function destroy(Client $clients, $id){
+        
+        $clients=Client::find($id);
         $clients->delete();
         return redirect()->route('client.view');
         
@@ -50,8 +52,25 @@ class ClientController extends Controller
 
             public function edit(Client $clients)
             {
-                $clients = Client::all();
-                return view('client.view', compact('clients'));
-            }            
+                $clients = Client::all()->first();
+                return view('clients.edit', compact('clients'));
+            }   
+            
+            
+
+            public function update(Request $request, Client $client)
+            {
+                $request->validate([
+        
+        
+                ]);
+        
+        
+                $client->update($request->all());
+        
+                return  redirect()->route('client.view')->with('success','Client Modifiée avec succes');
+        
+            }
+        
    
 }

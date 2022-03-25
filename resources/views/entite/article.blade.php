@@ -125,11 +125,26 @@
                 <tr style="cursor: pointer">
                   <th scope="row">{{$article->id}}</th>
                   <td>{{$article->name}}</td>
-                  <td>{{$article->prixUnitaire}} &nbsp;FCFA</td>
+                  <td>{{$article->prixUnitaire}} &nbsp;<i>fcfa</i></td>
                   <td>{{$article->stockMinimal}}</td>
                   <td>{{$article->stockMaximal}}</td>
                   <td>{{$article->created_at}}</td>
                   <td>{{$article->updated_at}}</td>
+
+                  <td>
+                  <form action="{{route('articles.destroy',$article->id)}}" method="post">
+
+                  <a href="{{route('articles.show',$article->id)}}"  class="btn btn-info">Afficher</a>
+                  <a href="{{route('articles.edit',$article->id)}}"  class="btn btn-primary">modifier</a>
+
+                    {{csrf_field()}}
+                    {{method_field('DELETE')}}
+                  <button type="submit"  class="btn btn-danger">Supprimer</button>
+
+                  </form>
+                  
+                  
+                  </td>
                 </tr>
               @endforeach
 
@@ -137,34 +152,11 @@
           </table>
         </div>
         
-        {{-- <div class="col-lg-5 col-6">
-          <!-- small box -->
-          <div class="small-box bg-success">
-            <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-              <p>Bounce Rate</p>
-            </div>
-            
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div> --}}
-
-        {{--  --}}
+      
         
         <div id="modalTwo" class="modal" >
           
-              {{-- <span class="close">&times;</span>
-              <form action="/">
-                <h2>Ajout d'un article</h2>
-                <div>
-                  <input class="fname" type="text" name="name" placeholder="Full name">
-                  <input type="text" name="name" placeholder="Email">
-                  <input type="text" name="name" placeholder="Phone number">
-                  <input type="text" name="name" placeholder="Website">
-                </div>
-                <button type="submit" href="/">Submit</button>
-              </form> --}}
+            
               <div class="contact-form">
                 <div style="cursor: pointer">
                   <span class="close" >&times;</span>

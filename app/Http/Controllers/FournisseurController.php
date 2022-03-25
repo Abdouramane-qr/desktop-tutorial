@@ -97,10 +97,11 @@ class FournisseurController extends Controller
      */
     public function destroy($id)
     {
-        $fournisseurs = Fournisseurs::findOrFail($id);
+        $fournisseurs = Fournisseurs::first($id);
         $fournisseurs->delete();
-        DB::table('fournisseurs')->where('id',$id)->delete();
-        return view('fournisseurs.index');
+        
+        return redirect()->route('fournisseurs.index')
+        ->with('success','Fournisseur deleted successfully');
 
     }
 }

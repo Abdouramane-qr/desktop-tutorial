@@ -30,11 +30,21 @@ Route::get('/commande-view',[CommandeController::class, 'index'])->name('command
 
 
 Route::post('/article-store',[ArticleController::class, 'store'])->name('article.store');
+Route::delete('/articles-destroy/{id}',[ArticleController::class, 'destroy'])->name('articles.destroy');
+Route::get('/article-edit/{id}',[ArticleController::class, 'edit'])->name('articles.edit');
+Route::get('/article-show/{id}',[ArticleController::class, 'show'])->name('articles.show');
+Route::put('/article-update/{id}',[ArticleController::class, 'update'])->name('articles.update');
+
+
+
+
 Route::post('/client-store',[ClientController::class, 'store'])->name('client.store');
 Route::post('/commande-store',[CommandeController::class, 'store'])->name('commande.store');
-Route::post('/client-destroy',[ClientController::class, 'destroy'])->name('client.destroy');
+Route::delete('/client-destroy/{id}',[ClientController::class, 'destroy'])->name('client.destroy');
 Route::get('/commande-show/{id}/',[CommandeController::class, 'show'])->name('commande.show');
 Route::get('/client-edit',[ClientController::class, 'edit'])->name('client.edit');
+Route::get('/clients-edit',[ClientController::class,'edit'])->name('clients.edit');
+
 
 
 
