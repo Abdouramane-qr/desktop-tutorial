@@ -16,7 +16,7 @@ class Stock extends Model
 
     protected $fillable = [
         
-        'nom',
+        'name',
         'price',
         'min_stock',
         'current_stock',

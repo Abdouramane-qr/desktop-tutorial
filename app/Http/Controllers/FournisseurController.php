@@ -39,11 +39,11 @@ class FournisseurController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'nom' => 'required',
-        //     'adresse' => 'required',
-        //     'telephone' =>'required',    
-        // ]);
+         $request->validate([
+             'nom' => 'required',
+            'adresse' => 'required',
+            'telephone' =>'required',    
+        ]);
     
 
         Fournisseurs::create($request->all());
@@ -97,7 +97,7 @@ class FournisseurController extends Controller
      */
     public function destroy($id)
     {
-        $fournisseurs = Fournisseurs::first($id);
+        $fournisseurs = Fournisseurs::find($id);
         $fournisseurs->delete();
         
         return redirect()->route('fournisseurs.index')

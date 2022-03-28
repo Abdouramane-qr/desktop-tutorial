@@ -18,7 +18,7 @@ class Article extends Model
 
     public function commandes()
     {
-        $this->belongToMany(Article::class);
+        $this->belongToMany(CommandeArticle::class, 'article_id', 'id');
     }
 
 

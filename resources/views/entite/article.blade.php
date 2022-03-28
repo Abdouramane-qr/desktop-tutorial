@@ -118,6 +118,8 @@
                 <th scope="col">Stock actuel</th>
                 <th scope="col">Créer le</th>
                 <th scope="col">Modifié le</th>
+                <th scope="col">Button d'action</th>
+
               </tr>
             </thead>
             <tbody>
@@ -130,21 +132,17 @@
                   <td>{{$article->stockMaximal}}</td>
                   <td>{{$article->created_at}}</td>
                   <td>{{$article->updated_at}}</td>
+                  <td><a href="{{route('articles.edit',$article->id)}}"  class="btn btn-primary">modifier</a></td>
 
                   <td>
                   <form action="{{route('articles.destroy',$article->id)}}" method="post">
-
-                  <a href="{{route('articles.show',$article->id)}}"  class="btn btn-info">Afficher</a>
-                  <a href="{{route('articles.edit',$article->id)}}"  class="btn btn-primary">modifier</a>
-
+                     {{-- <td><a href="{{route('articles.show',$article->id)}}"  class="btn btn-info">Afficher</a></td>                   --}}
                     {{csrf_field()}}
                     {{method_field('DELETE')}}
                   <button type="submit"  class="btn btn-danger">Supprimer</button>
 
                   </form>
-                  
-                  
-                  </td>
+                </td>
                 </tr>
               @endforeach
 

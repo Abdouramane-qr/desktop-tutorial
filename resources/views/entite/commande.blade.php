@@ -9,8 +9,8 @@
           z-index: 8;
           left: 0;
           top: 0;
-          width: 100%;
-          height: 100%;
+          width: 150%;
+          height: 150%;
           overflow: auto;
           background-color: rgb(0, 0, 0);
           background-color: rgba(0, 0, 0, 0.4);
@@ -74,6 +74,8 @@
 
     }
 
+    
+
   </style>
 @endsection
 
@@ -90,8 +92,7 @@
               </div>
           @endif
           
-          <button class="button" data-modal="modalTwo" style="background: #007bff; width: 90px">Ajouter</button>         
-          
+          <button class="button" data-modal="modalTwo" style="background: #007bff; width: 90px">Ajouter</button>                   
           <a class="btn btn-success" href="{{route('generate-pdf')}}">Telecharger</a>
           
         </div>
@@ -149,34 +150,11 @@
 
         </div>
    
-        {{-- <div class="col-lg-5 col-6">
-          <!-- small box -->
-          <div class="small-box bg-success">
-            <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-              <p>Bounce Rate</p>
-            </div>
-            
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div> --}}
-
-        {{--  --}}
+        
         
         <div id="modalTwo" class="modal" >
           
-              {{-- <span class="close">&times;</span>
-              <form action="/">
-                <h2>Ajout d'un article</h2>
-                <div>
-                  <input class="fname" type="text" name="name" placeholder="Full name">
-                  <input type="text" name="name" placeholder="Email">
-                  <input type="text" name="name" placeholder="Phone number">
-                  <input type="text" name="name" placeholder="Website">
-                </div>
-                <button type="submit" href="/">Submit</button>
-              </form> --}}
+              
               <div class="contact-form">
                 <div style="cursor: pointer">
                   <span class="close" >&times;</span>
@@ -193,18 +171,46 @@
                           document.getElementById('modalTwo').style.display = "block";
                         </script>
                     @endif
+<div class="row">
+  <div class="col-md-6">
+    <ul class="list-group"> 
+      @foreach ($articles as $article)
+      <li id="article{{$article->id}}"  onclick="select3({{$article->id}})"  class="list-group-item d-flex justify-content-between align-items-center">{{$article->name}} <i>Prix:&nbsp;&nbsp;{{$article->prixUnitaire}}&nbsp;&nbsp;Fcfa</i><span class="badge bg-primary rounded-pill"></span></li> 
+      @endforeach
+</ul>
+  </div>
+  <div class="col-md-6">
+<form action="" method="post" >
 
-                    {{-- <input type="number" name="commande" required="required" > --}}
-                    <select name="commande" required="required" style="border-bottom: 2px solid #333; width: 50%; border-top: none;">
-                        <option ><span>Article acheté</span></option>
-                        @foreach ($articles as $article)
-                            <option value="{{$article->name}}">{{$article->name}}</option>
-                        @endforeach
-                      </select>
-                    {{-- <span>Commande</span> --}}
+
+  <table  class="table table-hover  test" style="border: 1px solid; background: #fff">
+    <thead>
+      <tr>
+        <th>Sélectionner</th>
+        <th scope="col">id</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Prix unitaire </th>
+        <th scope="col">Quantité</th>
+      </tr>
+    </thead>
+    <tbody  id="panier">
+
+    </tbody>
+  </table>
+  <a type="button" class="delete  btn btn-danger">Supprimer une ligne</a>
+
+</form>
+    <div class="inputBox">
+      <input type="submit" name="" value="Envoyer">
+    </div>
+
+  </div>
+  
+
+</div>
                   </div>
 
-                  <div class="inputBox">
+                  {{-- <div class="inputBox">
                     @if ($errors->has('quantite'))
                         <p style="color: red">{{$errors->first('quantite')}}</p>
                         <script>
@@ -214,9 +220,9 @@
 
                     <input type="number" name="quantite" required="required" >
                     <span>Quantité</span>
-                  </div>
+                  </div> --}}
 
-                  <div class="inputBox">
+                  {{-- <div class="inputBox">
                     @if ($errors->has('price'))
                         <p style="color: red">{{$errors->first('price')}}</p>
                         <script>
@@ -226,11 +232,8 @@
 
                     <input type="number" name="price" required="required" >
                     <span>Prix</span>
-                  </div>
+                  </div> --}}
 
-                  <div class="inputBox">
-                    <input type="submit" name="" value="Envoyer">
-                  </div>
         
                 </form>
                 
@@ -268,6 +271,41 @@
         event.target.style.display = "none";
       }
     }
+   function select3(id){
+var nom=$('#article'+id).text();
+var prix=$('#article'+id +' > span').text();
+var tr=`<tr id="ligne${id}" style="cursor: pointer">
+          <td><input type="checkbox" name="select"></td>
+          <th scope="row">${id}</th>
+          <td>${nom}</td>
+          <td>${prix} <input type="number"  palceholder="Entrez Prix" value="0" name="" id=""></td>
+          <td> <input type="number"  palceholder="Entrez Quantité" value="0" name="" id=""></td>
+        </tr>`;
+$('#panier').append(tr);
+$('#article'+id).hide();
+    }
+
+
   </script>
  
 @endsection
+{{-- <select  class="mutltiSelect" name="commande" required="required" style="border-bottom: 2px solid #333; width: 50%; border-top: none;">
+ 
+</select> --}}
+
+{{-- <ul class="list-group">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    A list item
+    <span class="badge bg-primary rounded-pill">14</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    A second list item
+    <span class="badge bg-primary rounded-pill">2</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    A third list item
+    <span class="badge bg-primary rounded-pill">1</span>
+  </li>
+</ul> --}}
+
+{{-- <td> <span  onclick="supprimer(${id})" type="number" name="" id=""></span></td> --}}

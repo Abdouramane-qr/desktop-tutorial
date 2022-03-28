@@ -45,4 +45,16 @@ public function totalcmd(){
 $this->total +=$this->Prixtotl;
 return $this->total;
         }
+
+
+
+        public function client()
+        {
+            return $this->belongsTo(Client::class);
+        }
+
+        public function articles()
+        {
+          return $this->hasMany(CommandeArticle::class, 'commande_id','id');
+        }
 }

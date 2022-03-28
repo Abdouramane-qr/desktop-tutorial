@@ -118,20 +118,20 @@
                 <th scope="col">Adresse</th>
                 <th scope="col">Téléphone</th>
                 <th scope="col">date</th>
-                <th scope="col">Butons</th>
+                <th scope="col">Buttons Action</th>
               </tr>
             </thead>
 
             <tbody>
-              @foreach ($fournisseurs as $fourisseur)
+              @foreach ($fournisseurs as $fournisseur)
                 <tr style="cursor: pointer">
-                  <th scope="row">{{$fournisseur->id}}</th>
-                  <td>{{$fournisseur->nom}}</td>
-                  @if ($fournisseur->adresse)
-                    <td>{{$fournisseur->nom}}</td>
+                  <th scope="row">{{$fournisseurs->id}}</th>
+                  <td>{{$fournisseurs->nom}}</td>
+                  @if ($fournisseurs->adresse)
+                    <td>{{$fournisseurs->nom}}</td>
                   @endif
-                  <td>{{$fournisseur->telephone}}</td>
-                  <td>{{$fournisseur->created_at}}</td>
+                  <td>{{$fournisseurs->telephone}}</td>
+                  <td>{{$fournisseurs->created_at}}</td>
                
               @endforeach
                   

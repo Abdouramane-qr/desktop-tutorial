@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CommandeArticle extends Model
 {
     use HasFactory;
+
+
+    
 }

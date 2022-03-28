@@ -118,6 +118,8 @@
                 {{-- <th scope="col">Commande</th>
                 <th scope="col">Quantité</th> --}}
                 <th scope="col">date</th>
+                <th scope="col">Action Buttons</th>
+
               </tr>
             </thead>
             
@@ -133,12 +135,12 @@
                   {{-- <td>{{$client->commande}}</td>
                   <td>{{$client->quantite}}</td> --}}
                   <td>{{$client->created_at}}</td>
-                  <td><a href="{{ route('clients.edit', $client->id)}}" class="btn btn-primary">Edit</a></td> 
+                  <td><a href="{{ route('clients.edit', $client->id)}}" class="btn btn-primary">Modifier</a></td> 
                   <td>
                        <form action="{{ route('client.destroy',$client->id)}}" method="post">
                           @csrf
                           @method('DELETE')
-                          <button class="btn btn-danger" type="submit">Delete</button>
+                          <button class="btn btn-danger" type="submit">Supprimer</button>
                        </form>
                   </td>
                 </tr>

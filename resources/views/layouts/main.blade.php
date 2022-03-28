@@ -8,7 +8,7 @@
   <title>{{config('app.name')}}</title>
 
   @yield('css')
-
+  <link rel="stylesheet" href="//cdn.componentator.com/spa.min@18.css" />
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -29,6 +29,26 @@
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css'">
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <style type="text/css">
+    table {
+    margin: 18px 0;
+    width: 100%;
+    border-collapse: collapse;
+}
+table th,
+table td {
+    text-align: left;
+    padding: 6px;
+}
+table,
+th,
+td {
+    border: 1px solid #000;
+}
+</style>
+ 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -177,7 +197,7 @@
                 <li class="nav-item">
                   <a href="{{ route('stocks.index')}}" class="nav-link">
                         {{-- <i class="far fa-circle nav-icon"></i> --}}
-                        <p>Stocks</p>
+                        <p>Magasin</p>
                       </a>
                     </li>
 
@@ -201,10 +221,16 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2021 <a href="kassbth.net">QUOREICH-FONDATION</a>.</strong>
+    <strong>Copyright &copy;  :date <a href="kassbth.net">QUOREICH-FONDATION</a>.</strong>
     tout droit réservé
     <div class="float-right d-none d-sm-inline-block">
       {{-- <b>Version</b> 1 --}}
+      Copyright   {{!!  __('&copy; :date  :QUOREICH-FONDATION, all right reservered', [
+
+        'date' => date('Y-m-d'),
+        'appname'=> config('QUOREICH-FONDATION')
+      ])  !!}}
+
     </div>
   </footer>
 
@@ -250,6 +276,20 @@
 <script src="dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
+        $(".delete").click(function() {
+        $("table.test").find('input[name="select"]').each(function() {
+            if ($(this).is(":checked")) {
+                $(this).parents("table.test tr").remove();
+            }
+        });
+    });  
+</script>
 
 @yield('js')
 </body>
